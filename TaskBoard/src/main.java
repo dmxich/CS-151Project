@@ -1,11 +1,8 @@
 
-
 import View.logInView;
 import View.PassWordDialog;
 
 public class main {
-
-
 
     public static void main(String[] args) {
         PassWordDialog passDialog;
