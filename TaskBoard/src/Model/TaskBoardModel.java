@@ -15,16 +15,12 @@ public class TaskBoardModel
 
     /**
      * Constracts a new instance of class
-     * TaskBoardModel with following parameters
-     * @param str
-     * @param aList
-     * @param fName
+     * TaskBoardModel
+     *
      */
-    public TaskBoardModel(String str, ArrayList<ProjectModel> aList, String fName )
+    public TaskBoardModel( )
     {
-        taskBoardName = str;
-        fileName = fName;
-        projectList = aList;
+
     }
 
 

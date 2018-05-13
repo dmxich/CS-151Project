@@ -35,14 +35,16 @@ public class logInView
         JLabel selectProject = new JLabel("Select Project");
 
         //create combo box
-        ArrayList<String> projectOptions = new ArrayList<>();
-        String[] prOptions = new String[]{};
+
+        String[] prOptions = new String[4];
+        prOptions[0] = "Project1";
 
         //dynamically populate it with projects we just created
-        for(int i = 0; i < prModelArray.size(); i ++){
-            projectOptions.add(prModelArray.get(1).getProjectName());
-            prOptions[i] = projectOptions.get(1);
+        for(int i = 1; i < taskBrdModel.getProjectList().size(); i++){
+            prOptions[i] = taskBrdModel.getProjectList().get(i).getProjectName();
         }
+
+
         JComboBox projectOptionsList = new JComboBox(prOptions);
 
         //add label and combobox to selectProjectAndComboBox JPanel
@@ -195,11 +197,17 @@ public class logInView
 
             }
             //create an instance of ProjectModel class
-            prModel = new ProjectModel(nameText.getText(), arrayOfColumn);
+            prModel = new ProjectModel();
+            prModel.setProjectName(nameText.getText());
+            prModel.setProjectList(arrayOfColumn);
+
 
             //add this object to ArrayList of ProjectModels
             prModelArray.add(prModel);
-            taskBrdModel = new TaskBoardModel(taskBoardModelName, prModelArray, fileName );
+            taskBrdModel = new TaskBoardModel();
+            taskBrdModel.setTaskBoardName(taskBoardModelName);
+            taskBrdModel.setProjectList(prModelArray);
+            taskBrdModel.setFileName(fileName);
 
             //login.removeAll();
            login.dispose();
@@ -213,7 +221,12 @@ public class logInView
             JPanel columnsPanel = new JPanel();
             columnsPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 200, 200));
             columnsPanel.setBackground(Color.WHITE);
+
+            login.add(columnsPanel, BorderLayout.WEST);
             //add(columnsPanel, BorderLayout.WEST);
+
+
+            
             
 
         });

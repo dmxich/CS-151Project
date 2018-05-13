@@ -1,10 +1,24 @@
 
+
+import Model.Column;
+import Model.ProjectModel;
+import Model.TaskBoardModel;
 import View.logInView;
 import View.PassWordDialog;
 
-public class main {
+import java.util.ArrayList;
 
-    public static void main(String[] args) {
+public class main
+{
+
+
+
+    public static void main(String[] args)
+    {
+
+
+
+
         PassWordDialog passDialog;
         //logInView login = new logInView();
 

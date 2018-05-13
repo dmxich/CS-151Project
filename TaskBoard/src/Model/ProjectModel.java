@@ -1,6 +1,5 @@
 package Model;
 import java.util.*;
-import Model.Column;
 
 public class ProjectModel {
 
@@ -14,14 +13,12 @@ public class ProjectModel {
 
     /**
      * Constructor create an instance
+     * of Class ProjectModel
      *
-     * @param projectName
-     * @param projectList
      */
-    public ProjectModel(String projectName, ArrayList<Column> projectList) {
+    public ProjectModel() {
 
-        this.projectName = projectName;
-        this.projectList = projectList;
+
 
 
     }

@@ -3,8 +3,9 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-
 import Model.*;
+
+
 
 public class ProjectView
 {
@@ -37,8 +38,18 @@ public class ProjectView
         //create label for "Select project"
         JLabel selectProject = new JLabel("Select Project");
 
+
+
+        String[] projectOptions = new String[]{};
         //create combo box
-        String[] projectOptions = { "Project1", "Project2", "Project3", "Project4", "Project4" };
+
+
+        //dynamically populate it with projects we just created
+        for(int i = 0; i < taskBoardM.getProjectList().size(); i++){
+            projectOptions[i] = taskBoardM.getProjectList().get(i).getProjectName();
+        }
+
+
         JComboBox projectOptionsList = new JComboBox(projectOptions);
 
         //create Edit, Save, Delete buttons
