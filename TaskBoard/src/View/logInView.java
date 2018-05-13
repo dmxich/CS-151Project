@@ -214,9 +214,6 @@ public class logInView
             columnsPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 200, 200));
             columnsPanel.setBackground(Color.WHITE);
             //add(columnsPanel, BorderLayout.WEST);
-
-
-            
             
 
         });
