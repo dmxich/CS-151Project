@@ -20,7 +20,7 @@ public class TaskBoardModel
      */
     public TaskBoardModel( )
     {
-
+        projectList = new ArrayList<>();
     }
 
 

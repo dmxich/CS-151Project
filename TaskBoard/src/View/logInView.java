@@ -15,11 +15,13 @@ public class logInView
     int rowCount = 0;
     JDialog d;
     private static ArrayList<JTextField> textField = new ArrayList<>();
-    private ArrayList<ProjectModel> prModelArray = new ArrayList<>();
+   // private ArrayList<ProjectModel> prModelArray = new ArrayList<>();
     String taskBoardModelName = "TaskBoard1";
     String fileName = " ";
     ProjectModel prModel;
     TaskBoardModel taskBrdModel;
+    JComboBox projectOptionsList;
+    JPanel holdCenter;
 
     public logInView(JDialog dialog)
     {
@@ -27,6 +29,7 @@ public class logInView
         d = dialog;
         login = new JFrame();
         login.setLayout(new BorderLayout());
+        taskBrdModel = new TaskBoardModel();
 
         //panel for select project and combobox
         JPanel selectProjectAndComboBox = new JPanel();
@@ -36,16 +39,22 @@ public class logInView
 
         //create combo box
 
-        String[] prOptions = new String[4];
-        prOptions[0] = "Project1";
+       // ArrayList<ProjectModel> prOptions = new ArrayList<ProjectModel>();
+        /*ProjectModel pm = new ProjectModel();
+        pm.setProjectName("project1");
+        prOptions.add(pm);*/
 
         //dynamically populate it with projects we just created
-        for(int i = 1; i < taskBrdModel.getProjectList().size(); i++){
-            prOptions[i] = taskBrdModel.getProjectList().get(i).getProjectName();
+        //taskBrdModel.setProjectList(prOptions);
+
+        projectOptionsList = new JComboBox();
+
+        if ((taskBrdModel.getProjectList() != null) && !taskBrdModel.getProjectList().isEmpty()) {
+            for (int i = 0; i < taskBrdModel.getProjectList().size(); i++) {
+                //prOptions.add(taskBrdModel.getProjectList().get(i));
+                projectOptionsList.addItem(taskBrdModel.getProjectList().get(i).getProjectName());
+            }
         }
-
-
-        JComboBox projectOptionsList = new JComboBox(prOptions);
 
         //add label and combobox to selectProjectAndComboBox JPanel
         selectProjectAndComboBox.add(selectProject);
@@ -101,7 +110,7 @@ public class logInView
     public void createProject ()
     {
         //createPanel to hold center panel
-        JPanel holdCenter = new JPanel(new BorderLayout());
+        holdCenter = new JPanel(new BorderLayout());
         //create empty border to make center panel centered
         holdCenter.setBorder(BorderFactory.createEmptyBorder(100, 200, 100, 200));
 
@@ -185,51 +194,60 @@ public class logInView
 
         //adding action listener for create button
         create.addActionListener(e -> {
-            //Go to view for creating the columns!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        	
-        	ArrayList<Column> arrayOfColumn = new ArrayList<Column>();
+
+                    //Go to view for creating the columns!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                    ArrayList<Column> arrayOfColumn = new ArrayList<Column>();
 
 
-            //create an ArrayList to store statuses of each task
-            for(int i = 0; i<textField.size(); i++ ) {
-                Column newCol = new Column(textField.get(i).getText());
-                arrayOfColumn.add(newCol);
+                    //create an ArrayList to store statuses of each task
+                    for (int i = 0; i < textField.size(); i++) {
+                        Column newCol = new Column(textField.get(i).getText());
+                        arrayOfColumn.add(newCol);
 
-            }
-            //create an instance of ProjectModel class
-            prModel = new ProjectModel();
-            prModel.setProjectName(nameText.getText());
-            prModel.setProjectList(arrayOfColumn);
+                    }
+                    //create an instance of ProjectModel class
+                    prModel = new ProjectModel();
+                    prModel.setProjectName(nameText.getText());
+                    prModel.setProjectList(arrayOfColumn);
 
 
-            //add this object to ArrayList of ProjectModels
-            prModelArray.add(prModel);
-            taskBrdModel = new TaskBoardModel();
-            taskBrdModel.setTaskBoardName(taskBoardModelName);
-            taskBrdModel.setProjectList(prModelArray);
-            taskBrdModel.setFileName(fileName);
+                    //add this object to ArrayList of ProjectModels
+                    //prModelArray.add(prModel);
+                    //taskBrdModel = new TaskBoardModel();
+                    taskBrdModel.setTaskBoardName(taskBoardModelName);
+                    //taskBrdModel.setProjectList(prModelArray);
+                    taskBrdModel.setFileName(fileName);
+
+                    taskBrdModel.addProject(prModel);
+                    projectOptionsList.addItem(prModel.getProjectName());
+
+                    projectOptionsList.validate();
+                    login.remove(holdCenter);
+                    login.validate();
+                });
 
             //login.removeAll();
-           login.dispose();
+         //  login.dispose();
             
            
            // ---- You are creating the new project view here. ----           
            // -----Do something with the arrayOfColumn, prModel, prModelArray, taskBrdModel   
-            ProjectView newProject = new ProjectView(d, arrayOfColumn, prModel, taskBrdModel);
+         //   ProjectView newProject = new ProjectView(d, arrayOfColumn, prModel, taskBrdModel);
            
 
-            JPanel columnsPanel = new JPanel();
-            columnsPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 200, 200));
-            columnsPanel.setBackground(Color.WHITE);
+          //  JPanel columnsPanel = new JPanel();
+            //columnsPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 200, 200));
+            //columnsPanel.setBackground(Color.WHITE);
 
-            login.add(columnsPanel, BorderLayout.WEST);
+            //login.add(columnsPanel, BorderLayout.WEST);
             //add(columnsPanel, BorderLayout.WEST);
 
 
             
             
 
-        });
+       // });
 
         //adding action listener for cancel button
         cancel.addActionListener(e->{
